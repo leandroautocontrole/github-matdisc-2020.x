@@ -50,7 +50,7 @@
 #include <allegro.h>
 
 /* ---------------------------------------------------------------------- */
-/* função principal */
+/* funÃ§Ã£o principal */
 int main(void)
 {
   BITMAP *buff;
@@ -71,7 +71,7 @@ int main(void)
   }
 
   circle(buff, 320, 240, 200, CORAZUL);
-  textprintf_ex(buff, font, 180, 240, CORVERMELHO, CORPRETO, "Circunferencia criada com SUCESSO!!!!");
+  textprintf_ex(buff, font, 180, 240, CORVERMELHO, CORPRETO, "Circunferencia criada com SUCESSO!!!");
 
   save_bitmap(IMAGENAME, buff, pal);
   destroy_bitmap(buff);
@@ -86,3 +86,4 @@ END_OF_MAIN()
 /* ---------------------------------------------------------------------- */
 /* vi: set ai et ts=4 sw=4 tw=0 wm=0 fo=croql : C config for Vim modeline */
 /* Template by Dr. Beco <rcb at beco dot cc> Version 20160612.142044      */
+
