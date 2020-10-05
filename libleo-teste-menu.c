@@ -41,7 +41,7 @@
 #include <unistd.h> /* UNIX standard function */
 #include <stdbool.h>
 #include <string.h>
-#include "libleo.h"  /* To be created for this template if needed */
+#include "libleo-teste-menu.h"  /* To be created for this template if needed */
 
 /* ----------------------------------------------------------------------------------- */
 /* Função principal */
@@ -56,8 +56,17 @@ int main(void)
 /* Função para inicialização e chamada */
 void libleo_init(void)
 {
-    substring();
-
+    /* bug: ainda não consegui colocar gerar_aleatorios no menu() */
+    printf("\n ---------------------------------------------------------------------\n");
+    printf(" /* gerar_aleatorios */ \n");
+    
+    int quant_num = 0, max_interv = 0;
+    int num_sort[quant_num];
+    gerar_aleatorios(num_sort, quant_num, max_interv);
+    system("pause");
+    
+    menu();
+    
     printf("\n");
 }
 
@@ -88,8 +97,6 @@ void gerar_aleatorios(int num_sort[], int quant_num, int max_interv)
         num_sort[i] = v;
     }
 
-    /* Caso queira exibir */
-    /*
     printf("\n ********************************************************************* ");
     printf("\n ********************     NUMEROS SORTEADOS     **********************\n ");
     printf("********************************************************************* \n\n");
@@ -100,11 +107,12 @@ void gerar_aleatorios(int num_sort[], int quant_num, int max_interv)
     }
     printf("\n");
     printf("\n ---------------------------------------------------------------------\n");
-    */
+
 }
 
 /* ----------------------------------------------------------------------------------- *
  * Função my_strlen --> Função que conta a quantidade de caracteres de uma string      *
+ *                                                                                     *
  * ----------------------------------------------------------------------------------- */
 int my_strlen(char *str)
 {
@@ -122,13 +130,10 @@ int my_strlen(char *str)
         tam++;
     }
 
-    /* Caso queira exibir */
-    /*
     printf(" A string digitada possui <%d> caracteres", tam + 1);
     printf("\n");
     printf("\n ---------------------------------------------------------------------\n");
-    */
-
+    
     return tam + 1;
 
 }
@@ -136,6 +141,7 @@ int my_strlen(char *str)
 
 /* ----------------------------------------------------------------------------------- *
  * Função testar --> Função auxiliar para pesquisa.                                    *
+ *                                                                                     *
  * ----------------------------------------------------------------------------------- */
 bool testar(int teste[], int tam)
 {
@@ -152,6 +158,7 @@ bool testar(int teste[], int tam)
 
 /* ----------------------------------------------------------------------------------- *
  * Função existe --> Função auxiliar para pesquisa.                                    *
+ *                                                                                     *
  * ----------------------------------------------------------------------------------- */
 bool existe(char palavra[], char frase[])
 {
@@ -196,8 +203,9 @@ bool existe(char palavra[], char frase[])
 
 /* ----------------------------------------------------------------------------------- *
  * Função substring --> Função para localizar substrings em uma string                 *
+ *                                                                                     *
  * ----------------------------------------------------------------------------------- */
-bool substring(void)
+void substring(void)
 {
     char frase[SBUFF];
     char palavra[SBUFF];
@@ -214,19 +222,15 @@ bool substring(void)
 
     if(existe(palavra, frase))
     {
-       /* printf("\n A string <%s> EXISTE na frase <%s>!", palavra, frase); */
-        return true;
+        printf("\n A string <%s> EXISTE na frase <%s>!", palavra, frase);
     }
     else
     {
-       /* printf("\n A string <%s> NAO EXISTE na frase <%s>!", palavra, frase); */
-        return false;
+        printf("\n A string <%s> NAO EXISTE na frase <%s>!", palavra, frase);
     }
-
-    /*
     printf("\n");
     printf("\n ---------------------------------------------------------------------\n");
-    */
+    
 }
 
 /* ----------------------------------------------------------------------------------- *
@@ -258,14 +262,12 @@ void manip_arq(void)
     }
 
     fprintf(arquivo, texto);  /* Grava uma string num arquivo */
-    fclose(arquivo);  /* Fecha o arquivo */
-   
-    /* Caso queira exibir */
-    /*
     printf("\n Texto adicionado ao arquivo: %s", texto);
+    
+    fclose(arquivo);  /* Fecha o arquivo */
+    
     printf("\n");
     printf("\n ---------------------------------------------------------------------\n");
-    */    
 }
 
 /* ----------------------------------------------------------------------------------- *
@@ -294,12 +296,90 @@ void manip_arq_redir(void)
  
     fclose(arquivo);  /* Fecha o arquivo */
 
-    /* Caso queira imprimir */
-    /*
     printf("\n String <%s> gravada com sucesso!\n\n", texto);
-    printf("\n");
-    printf("\n ---------------------------------------------------------------------\n");
-    */
+}
+
+/* ----------------------------------------------------------------------------------- *
+ * Função limpa_tela --> Função para limpar a tela.                                    *
+ *                                                                                     *
+ * ----------------------------------------------------------------------------------- */
+void limpa_tela(void)
+{
+    system("CLS");
+}
+
+/* ----------------------------------------------------------------------------------- *
+ * Função menu --> Menu interativo para navegar nas funções                            *
+ *                                                                                     *
+ * ----------------------------------------------------------------------------------- */
+void menu(void)
+{
+    int opcao = 0; /* Opção escolhida pelo usuário */
+
+    while(1)
+    {
+        limpa_tela();
+        printf("\n\t >> Bem-vindo a libleo.h << \n\n");
+        printf("\n 1 - Funcao substring ");
+        printf("\n 2 - Funcao my_strlen ");
+        printf("\n 3 - Funcao manip_arq ");
+        printf("\n 4 - Funcao manip_arq_redir ");
+        printf("\n 5 - Funcao gerar_aleatorios ");
+        printf("\n 6 - Sair ");
+        printf("\n\n Escolha uma opcao e tecle <ENTER>: ");
+
+        scanf("%lc", &opcao); /* Faz a leitura da opção do usuário */
+        fflush(stdin); /* Limpa o buffer do teclado */
+
+        switch(opcao)
+        {
+            case '1':
+                printf("\n ---------------------------------------------------------------------\n");
+                printf(" /* substring */ \n");
+                substring();
+                system("pause");
+                break;
+
+            case '2':
+                printf("\n ---------------------------------------------------------------------\n");
+                printf(" /* my_strlen */ \n");
+                char *str[SBUFF];
+                my_strlen(str);
+                system("pause");
+                break;
+
+            case '3':
+                printf("\n ---------------------------------------------------------------------\n");
+                printf(" /* manip_arq */ \n");
+                manip_arq();
+                system("pause");
+                break;
+
+            case '4':
+                printf("\n ---------------------------------------------------------------------\n");
+                printf(" /* manip_arq_redir */ \n");
+                manip_arq_redir();
+                system("pause");
+                break;
+
+            case '5':
+                printf("\n ---------------------------------------------------------------------\n");
+                printf(" /* gerar_aleatorios */ \n");
+               /* int quant_num, max_interv; */
+               /* int num_sort[quant_num]; */
+               /* gerar_aleatorios(num_sort, quant_num, max_interv); */
+               /* system("pause"); */
+                break;
+
+            case '6':
+                printf("\n ---------------------------------------------------------------------\n");
+                printf("\n Saindo...\n");
+                exit(0);
+
+            default:
+                break;
+        }
+    }
 }
 
 

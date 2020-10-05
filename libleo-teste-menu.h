@@ -57,9 +57,12 @@ void gerar_aleatorios(int num_sort[], int quant_num, int max_interv);
 int my_strlen(char *str);
 bool testar(int teste[], int tam);
 bool existe(char palavra[], char frase[]);
-bool substring(void);
+void substring(void);
 void manip_arq(void);
 void manip_arq_redir(void);
+void limpa_tela(void);
+void menu(void);
+
 
 #endif /* NOT def _LIBLEO_H */
 
